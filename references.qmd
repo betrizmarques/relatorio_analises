@@ -1,0 +1,7 @@
+# Achados e Recomedações 
+
+1. **A Ordem importa para maratonistas rápidos**: Para corredores com tempo Sub-4 horas, iniciar com o Treino A no primeiro bloco proporcionou tempo de maratona mais rápido, representando uma economia de $21,4$ minutos ($p = 0,01458$).
+
+2. **Custo psicofisiológico diferenciado**: O Grupo 2 reportou maior nível de estresse ($p = 0,0242$) e pior qualidade de sono ($p = 0,0257$), recomendando atenção ao controle de carga nessa ordem de aplicação.
+
+3. **Gerenciamento do cansaço pós-TT**: Testes em ritmo de Time Trial geram quase o dobro de queda na velocidade neuromuscular ($13,17\%$ contra $7,37\%$) quando comparados a corridas contínuas em Zona 1, exigindo maior tempo de recuperação programado após os testes de 21km TT.

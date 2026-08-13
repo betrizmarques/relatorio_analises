@@ -1,0 +1,649 @@
+# Análise exploratória de dados
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 9,
+  fig.height = 6,
+  fig.align = "center"
+)
+```
+
+```{r, results='hide', warning=FALSE, message=FALSE}
+library(tidyverse)
+library(janitor)
+library(lme4)
+library(lmerTest)
+library(rstatix)
+library(ggplot2)
+library(readxl)
+library(hms)
+library(gt)
+library(plotly)
+dados <- read_xlsx("../projeto_movimenta_ufpr/Dados_06.07.xlsx") %>% clean_names() %>% 
+  type.convert(as.is = TRUE) %>% drop_na(codigo) |>  select(-c(
+    maratona_pace_km1,
+    maratona_fc_km1,
+    maratona_percent_vc_fc,
+    starts_with("fazer_as"))) |> mutate(maratona_tempo = as.double(maratona_tempo),
+                                        maratona_tempo = as_hms(maratona_tempo * 86400),
+                                        maratona_tempo = format(as.POSIXct(maratona_tempo), "%H:%M:%S"),
+                                        maratona_menos_4h = ifelse(as_hms(maratona_tempo) < as_hms("04:00:00"), "menos de 4h", "4h ou mais"))
+
+dicionario <- read_excel("../projeto_movimenta_ufpr/Dados_06.07.xlsx", sheet = 2) 
+```
+
+# Estrutura dos dados
+
+### Quantidade de atletas
+
+```{r}
+nrow(dados) 
+```
+
+### Número de variáveis
+
+```{r}
+ncol(dados)
+```
+
+### Primeiras 6 linhas dos dados
+
+```{r}
+dados |> head() |> gt() |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+### Variáveis e seus tipos
+
+```{r}
+glimpse(dados)
+```
+
+### Número de variáveis
+
+```{r}
+ncol(select_if(dados, is.numeric))
+```
+
+### Número de valores faltantes
+
+```{r}
+na_count <- sapply(select_if(dados, is.numeric), function(y) sum(is.na(y)))
+na_count <- data.frame(na_count)
+na_count |> arrange(desc(na_count))
+```
+
+### Distribuição das variáveis mais importantes
+
+```{r}
+dados_filtrados <- dados |> 
+  select_if(is.numeric) |> 
+  select(-contains(c("tempo_real", "pace")))
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = maratona_km_h_real, fill = grupo)) +
+  geom_boxplot() +
+  stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 1.0,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "maratona em km/h" em cada grupo')+
+  xlab("")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = tt_1_km_h_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Time trail de 21km - avaliação 1" em cada grupo')+
+  labs(y = "Time trail de 21km - avaliação 1 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = tt_2_km_h_real, fill = grupo)) +
+  geom_boxplot() +
+  stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Time trail de 21km - avaliação 2" em cada grupo')+
+  labs(y = "Time trail de 21km - avaliação 2 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = tt_3_km_h_real, fill = grupo)) +
+  geom_boxplot() +
+  stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Time trail de 21km - avaliação 3" em cada grupo')+
+  labs(y = "Time trail de 21km - avaliação 3 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = z1_1_km_h_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "21km em Z1 - avaliação 2" em cada grupo')+
+  labs(y = "21km em Z1 - avaliação 2 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = z1_2_km_h_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "21km em Z1 - avaliação 2" em cada grupo')+
+  labs(y = "21km em Z1 - avaliação 2 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = t1000_s4_km_h, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Teste 1km - Semana 4" em cada grupo')+
+  labs(y = "Teste 1km - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = t2000_s4_km_h, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Teste 2km - Semana 4" em cada grupo')+
+  labs(y = "Teste 2km - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = t3000_s4_km_h, fill = grupo)) +
+  geom_boxplot() +
+  stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = -0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Teste 3km - Semana 4" em cada grupo')+
+  labs(y = "Teste 3km - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = vc_s4_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Velocidade crítica - Semana 4" em cada grupo')+
+  labs(y = "Velocidade crítica - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = d_s4_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle("Distância máxima que pode ser percorrida acima da velocidade crítica - Semana 4")+
+  labs(y = "Distância (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = t1000_s12_km_h, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Teste 1km - Semana 12" em cada grupo')+
+  labs(y = "Teste 1km - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = t2000_s12_km_h, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Teste 2km - Semana 12" em cada grupo')+
+  labs(y = "Teste 2km - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = t3000_s12_km_h, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Teste 3km - Semana 12" em cada grupo')+
+  labs(y = "Teste 3km - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = vc_s12_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle('Distribuição da variável "Velocidade crítica - Semana 12" em cada grupo')+
+  labs(y = "Velocidade crítica - Semana 4 (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados, mapping = aes(x = maratona_menos_4h, y = d_s12_real, fill = grupo)) +
+  geom_boxplot() +
+    stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0.5,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+  ggtitle("Distância máxima que pode ser percorrida acima da velocidade crítica - Semana 12")+
+  labs(y = "Distância (km/h)")+
+  scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+  theme_minimal()+
+  xlab("")
+```
+
+```{r}
+ggplot(data = dados)+
+  geom_bar(mapping = aes(x = maratona_menos_4h), fill = "#A8CCC9")+
+  theme_minimal()+
+  xlab("")
+```
+
+# Desempenho ao longo das semanas
+
+## TT (S0, S8 e S16)
+
+```{r}
+
+df_21km <- dados %>%
+  select(
+    grupo, 
+    atleta = codigo,
+    s0 = `tt_1_km_h_real`,
+    s8 = `tt_2_km_h_real`,
+    s16 = `tt_3_km_h_real`
+  ) %>%
+  drop_na(grupo)
+
+
+df_long <- df_21km %>%
+  pivot_longer(
+    cols = starts_with("s"), 
+    names_to = "semana", 
+    values_to = "velocidade_media"
+  ) %>%
+  mutate(
+    semana = factor(semana, levels = c("s0", "s8", "s16"))
+  )
+
+resumo_exploratorio <- df_long %>%
+  group_by(grupo, semana) %>%
+  summarise(
+    n = n(),
+    media = mean(velocidade_media, na.rm = TRUE),
+    mediana = median(velocidade_media, na.rm = TRUE),
+    desvio_padrao = sd(velocidade_media, na.rm = TRUE),
+    minimo = min(velocidade_media, na.rm = TRUE),
+    maximo = max(velocidade_media, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+resumo_exploratorio |> gt()
+
+  ggplot(data = df_long, mapping = aes(x = semana, y = velocidade_media, fill = grupo))+
+    geom_boxplot()+
+     stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = -0.8,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+    labs(y = "Velocidade do TT (km/h)")+
+    scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+    theme_minimal()+
+    xlab("Semana")
+  
+  p <- ggplot(df_long, aes(x = semana, y = velocidade_media, group = atleta, color = grupo)) +
+  geom_line(alpha = 0.5, size = 0.8) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("#c7d66d", "#75b9be")) +
+  facet_wrap(~ grupo) + 
+  labs(
+    title = "Trajetória individual nos 21km TT",
+    x = "Semanas de treino",
+    y = "velocidade média (km/h)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none") 
+
+  ggplotly(p, tooltip = c("atleta", "velocidade_media"))
+```
+
+## Z1 (S4 e S12)
+
+```{r}
+df_z1 <- dados %>%
+  select(
+    grupo, 
+    atleta = codigo,
+    s4 = z1_1_km_h_real,
+    s12 = z1_2_km_h_real
+  ) %>%
+  drop_na(grupo)
+
+
+z1_long <- df_z1 %>%
+  pivot_longer(
+    cols = starts_with("s"), 
+    names_to = "semana", 
+    values_to = "velocidade_media"
+  ) %>%
+  mutate(
+    semana = factor(semana, levels = c("s4", "s12"))
+  )
+
+resumo_exploratorio_z1 <- z1_long %>%
+  group_by(grupo, semana) %>%
+  summarise(
+    n = n(),
+    media = mean(velocidade_media, na.rm = TRUE),
+    mediana = median(velocidade_media, na.rm = TRUE),
+    desvio_padrao = sd(velocidade_media, na.rm = TRUE),
+    minimo = min(velocidade_media, na.rm = TRUE),
+    maximo = max(velocidade_media, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+resumo_exploratorio_z1 |> gt()
+
+  ggplot(data = z1_long, mapping = aes(x = semana, y = velocidade_media, fill = grupo))+
+    geom_boxplot()+
+     stat_summary(
+    fun = mean, 
+    geom = "text", 
+    aes(label = sprintf("%.1f", after_stat(y))),       
+    vjust = 0,         
+    size = 3.5,    
+    pfontface = "bold",                         
+    position = position_dodge(0.75) 
+  ) +
+    labs(y = "Velocidade em Z1 (km/h)")+
+    scale_fill_manual(values = c("G1" = "#DCEAB2", "G2" = "#A8CCC9"))+
+    theme_minimal()+
+    xlab("Semana")
+
+```
+
+O outlier é o atleta $G2_09$ que realizou a avaliação com velocidade media de 7.11 km/h
+
+```{r}
+ p <- ggplot(z1_long, aes(x = semana, y = velocidade_media, group = atleta, color = grupo)) +
+  geom_line(alpha = 0.5, size = 0.8) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("#c7d66d", "#75b9be")) +
+  facet_wrap(~ grupo) + 
+  labs(
+    title = "Trajetória individual nos 21km TT",
+    x = "Semanas de treino",
+    y = "velocidade média (km/h)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none") 
+
+  ggplotly(p, tooltip = c("atleta", "velocidade_media"))
+```
+
+# Validação dos dados
+
+### Quantidade de atletas com o treino válido
+
+$L1_0 < L2_0 < VC_4$
+
+```{r}
+dados |> mutate(validade_s4 = ifelse(l1_s0 < l2_s0 & l2_s0 < vc_s4_real, "Válido", "Não Válido")) |> 
+  filter(validade_s4 == "Válido") |> nrow()
+```
+
+### Quantidade de atletas que a velocidade média no 1km fresco foi menor que pós 21km em S0
+
+$VM$ 1km fresco $<$ $VM$ 1 km pós
+
+```{r}
+dados |> filter(x1km_fresco_vm_s0 < x1km_pos_vm_s0) |>select(1:3, maratona_tempo, x1km_fresco_vm_s0, x1km_pos_vm_s0) |> gt() |> 
+  cols_label(
+    grupo = "Grupo",
+    codigo = "Código", 
+    nome = "Atleta",
+    maratona_tempo = "Tempo da maratona",
+    x1km_fresco_vm_s0 = "1 km fresco",
+    x1km_pos_vm_s0 = "1 km pós"
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+### Quantidade de atletas que a velocidade média no 1km fresco foi menor que pós 21km em S4
+
+```{r}
+dados |> filter(x1km_fresco_vm_s4 < x1km_pos_vm_s4) |>select(1:3, maratona_tempo, x1km_fresco_vm_s4, x1km_pos_vm_s4) |> gt() |> 
+  cols_label(
+    grupo = "Grupo",
+    codigo = "Código", 
+    nome = "Atleta",
+    maratona_tempo = "Tempo da maratona",
+    x1km_fresco_vm_s4 = "1 km fresco",
+    x1km_pos_vm_s4 = "1 km pós"
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+### Quantidade de atletas que a velocidade média no 1km fresco foi menor que pós 21km em S8
+
+```{r}
+dados |> filter(x1km_fresco_vm_s8 < x1km_pos_vm_s8) |>select(1:3, maratona_tempo, x1km_fresco_vm_s8, x1km_pos_vm_s8) |> gt() |> 
+  cols_label(
+    grupo = "Grupo",
+    codigo = "Código", 
+    nome = "Atleta",
+    maratona_tempo = "Tempo da maratona",
+    x1km_fresco_vm_s8 = "1 km fresco",
+    x1km_pos_vm_s8 = "1 km pós"
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+### Quantidade de atletas que a velocidade média no 1km fresco foi menor que pós 21km em S12
+
+```{r}
+dados |> filter(x1km_fresco_vm_s12 < x1km_pos_vm_s12) |>select(1:3, maratona_tempo, x1km_fresco_vm_s12, x1km_pos_vm_s12) |> gt() |> 
+  cols_label(
+    grupo = "Grupo",
+    codigo = "Código", 
+    nome = "Atleta",
+    maratona_tempo = "Tempo da maratona",
+    x1km_fresco_vm_s12 = "1 km fresco",
+    x1km_pos_vm_s12 = "1 km pós"
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```
+
+### Quantidade de atletas que a velocidade média no 1km fresco foi menor que pós 21km em S16
+
+```{r}
+dados |> filter(x1km_fresco_vm_s16 < x1km_pos_vm_s16) |>select(1:3, maratona_tempo, x1km_fresco_vm_s16, x1km_pos_vm_s16) |> gt() |> 
+  cols_label(
+    grupo = "Grupo",
+    codigo = "Código", 
+    nome = "Atleta",
+    maratona_tempo = "Tempo da maratona",
+    x1km_fresco_vm_s16 = "1 km fresco",
+    x1km_pos_vm_s16 = "1 km pós"
+  ) |>
+  cols_align(
+    align = "center",
+    columns = everything()
+  )
+```

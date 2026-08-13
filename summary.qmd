@@ -1,0 +1,478 @@
+# Perguntas
+
+Abaixo, realizamos a leitura das bases brutas e aplicamos as rotinas de tratamento para padronização de separadores decimais, correção de escalas de peso e estruturação das variáveis.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 9,
+  fig.height = 6,
+  fig.align = "center"
+)
+```
+
+```{r carregamento}
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(lme4)
+library(lmerTest)
+library(kableExtra)
+
+
+df_quant_bruto <- read_csv2("Book 2(Planilha1).csv", locale = locale(decimal_mark = ",", encoding = "latin1")) %>% 
+  slice(1:30)
+
+df_quali_bruto <- read_csv2("Quali(Planilha1) (1).csv", locale = locale(decimal_mark = ",", encoding = "latin1"))
+
+
+to_num <- function(x) { 
+  suppressWarnings(as.numeric(str_replace_all(as.character(x), ",", "."))) 
+}
+
+fix_peso <- function(x) {
+  sapply(x, function(val) {
+    num <- suppressWarnings(as.numeric(str_replace_all(as.character(val), ",", ".")))
+    if (is.na(num)) return(NA_real_)
+    while (num > 150) { num <- num / 10 }
+    return(round(num, 2))
+  })
+}
+
+parse_md <- function(x) {
+  x_str <- str_trim(as.character(x))
+  case_when(
+    str_detect(tolower(x_str), "^s|^1") ~ 1,
+    str_detect(tolower(x_str), "^n|^0") ~ 0,
+    TRUE ~ NA_real_
+  )
+}
+
+parse_likert_num <- function(x) {
+  x_str <- str_trim(as.character(x))
+  if_else(
+    str_detect(x_str, "^[0-9]"),
+    suppressWarnings(as.numeric(str_sub(x_str, 1, 1))),
+    suppressWarnings(as.numeric(str_replace_all(x_str, ",", ".")))
+  )
+}
+
+
+names(df_quant_bruto)[names(df_quant_bruto) %in% c("Maratona_Km/h_REAL", "Maratona_Km.h_REAL")] <- "Maratona_Kmh_Original"
+names(df_quant_bruto)[names(df_quant_bruto) %in% c("TT_1_Km/h_REAL", "TT_1_Km.h_REAL")] <- "TT_1_Kmh_Original"
+names(df_quant_bruto)[names(df_quant_bruto) %in% c("TT_2_Km/h_REAL", "TT_2_Km.h_REAL")] <- "TT_2_Kmh_Original"
+names(df_quant_bruto)[names(df_quant_bruto) %in% c("TT_3_Km/h_REAL", "TT_3_Km.h_REAL")] <- "TT_3_Kmh_Original"
+names(df_quant_bruto)[names(df_quant_bruto) %in% c("z1_1_Km/h_REAL", "z1_1_Km.h_REAL")] <- "z1_1_Kmh_Original"
+names(df_quant_bruto)[names(df_quant_bruto) %in% c("z1_2_Km/h_REAL", "z1_2_Km.h_REAL")] <- "z1_2_Kmh_Original"
+
+df_quant <- df_quant_bruto %>%
+  mutate(
+    Grupo = as.factor(Grupo),
+    Maratona_Minutos = as.numeric(Maratona_Tempo) / 60,
+    Maratona_Kmh = to_num(Maratona_Kmh_Original),
+    TT_S0 = to_num(TT_1_Kmh_Original),
+    TT_S8 = to_num(TT_2_Kmh_Original),
+    TT_S16 = to_num(TT_3_Kmh_Original),
+    Z1_S4 = to_num(z1_1_Kmh_Original),
+    Z1_S12 = to_num(z1_2_Kmh_Original),
+    VC_S4_limpa = if_else(to_num(VC_S4_REAL) > 30, to_num(VC_S4_REAL)/10, to_num(VC_S4_REAL)),
+    VC_S12_limpa = if_else(to_num(VC_S12_REAL) > 30, to_num(VC_S12_REAL)/10, to_num(VC_S12_REAL)),
+    Queda_1km_S0 = abs(to_num(Queda_S0)),
+    Queda_1km_S4 = abs(to_num(Queda_S4)),
+    Queda_1km_S8 = abs(to_num(Queda_S8)),
+    Queda_1km_S12 = abs(to_num(Queda_S12)),
+    Queda_1km_S16 = abs(to_num(Queda_S16)),
+    Nome_clean = str_to_lower(str_trim(iconv(Nome, to = "ASCII//TRANSLIT")))
+  )
+
+
+df_quali_clean <- df_quali_bruto %>%
+  mutate(
+    across(starts_with("Peso_"), fix_peso),
+    across(starts_with("MD_"), parse_md),
+    across(c(starts_with("Sono_"), starts_with("Stress_"), starts_with("Fadiga_"), starts_with("Dor_")), parse_likert_num),
+    Nome_clean = str_to_lower(str_trim(iconv(`Nome completo`, to = "ASCII//TRANSLIT")))
+  )
+
+df_all <- df_quant %>%
+  inner_join(df_quali_clean, by = "Nome_clean")
+```
+
+# Bloco 1: Análises Perceptivas e Qualitativas ($N = 28$)
+
+## Pergunta 1: Como se comporta a percepção de desgaste entre os grupos?
+
+**O que faz o Teste de Mann-Whitney?** É um teste estatístico não paramétrico utilizado para comparar duas amostras independentes. Ele avalia se uma distribuição tende a apresentar valores maiores do que a outra sem assumir que os dados seguem uma distribuição normal.
+
+```{r p1}
+dominios <- c("Sono", "Stress", "Fadiga", "Dor", "MD")
+
+res_p1 <- map_df(dominios, function(dom) {
+  cols <- names(df_all)[str_detect(names(df_all), paste0("^", dom, "_S"))]
+  df_all$media_dom <- rowMeans(df_all[, cols], na.rm = TRUE)
+  m_g1 <- mean(df_all$media_dom[df_all$Grupo == "G1"], na.rm = TRUE)
+  m_g2 <- mean(df_all$media_dom[df_all$Grupo == "G2"], na.rm = TRUE)
+  wt <- wilcox.test(media_dom ~ Grupo, data = df_all)
+  tibble(
+    Domínio = dom, 
+    `Média G1` = round(m_g1, 2), 
+    `Média G2` = round(m_g2, 2), 
+    `p-valor` = round(wt$p.value, 4),
+    `Significância` = if_else(wt$p.value < 0.05, "Significativo (p < 0,05)", "Não Significativo")
+  )
+})
+
+res_p1 %>%
+  kable(caption = "Comparação das Médias Qualitativas Acumuladas entre os Grupos") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+### Gráfico da série temporal qualitativa
+
+```{r grafico_p1}
+df_serie <- df_all %>%
+  select(Grupo, Nome_clean, starts_with("Fadiga_S"), starts_with("Stress_S"), starts_with("Dor_S"), starts_with("Sono_S")) %>%
+  pivot_longer(cols = -c(Grupo, Nome_clean), names_to = "Variavel_Semana", values_to = "Escore") %>%
+  separate(Variavel_Semana, into = c("Variavel", "Semana"), sep = "_S") %>%
+  mutate(Semana = as.numeric(Semana))
+
+ggplot(df_serie, aes(x = Semana, y = Escore, color = Grupo, group = Grupo)) +
+  stat_summary(fun = mean, geom = "line", linewidth = 1) +
+  stat_summary(fun = mean, geom = "point", size = 2) +
+  facet_wrap(~Variavel, scales = "free_y") +
+  labs(
+    title = "Evolução Semanal da Percepção Qualitativa (S4 a S18)",
+    subtitle = "Linhas representam a média semanal de cada grupo",
+    x = "Semana de Treinamento",
+    y = "Escore Médio Percebido",
+    color = "Sequência de Treino"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+**O que os dados nos mostram:** Iniciando a análise, observamos diferenças importantes no bem-estar percebido. Os maratonistas do Grupo 2 relataram um nível de estresse significativamente mais alto ($4,22$ contra $3,50$, com p-valor igual a $0,0242$) e uma qualidade de sono pior ($3,71$ contra $3,14$, com p-valor igual a $0,0257$) quando comparados ao Grupo 1. As variáveis de fadiga, dor e frequência de momentos difíceis mantiveram-se equivalentes entre ambos.
+
+## Pergunta 2: O mesmo atleta sente mais desgaste no 1º ou no 2º bloco de treinos?
+
+**O que faz o Teste de Wilcoxon Pareado?** Avalia a diferença dentro do mesmo indivíduo em dois momentos temporais distintos. Ele verifica se a intervenção ao longo do tempo altera o comportamento da variável para cada sujeito.
+
+```{r p2}
+res_p2 <- map_df(dominios, function(dom) {
+  cols_p1 <- names(df_all)[str_detect(names(df_all), paste0("^", dom, "_S[4-8]$"))]
+  cols_p2 <- names(df_all)[str_detect(names(df_all), paste0("^", dom, "_S(9|10|11|12|13|14|15|16)$"))]
+  p1_m <- rowMeans(df_all[, cols_p1], na.rm = TRUE)
+  p2_m <- rowMeans(df_all[, cols_p2], na.rm = TRUE)
+  wt <- wilcox.test(p1_m, p2_m, paired = TRUE)
+  tibble(
+    Domínio = dom, 
+    `Média 1º Bloco` = round(mean(p1_m, na.rm=T), 2), 
+    `Média 2º Bloco` = round(mean(p2_m, na.rm=T), 2), 
+    `p-valor` = round(wt$p.value, 4)
+  )
+})
+
+res_p2 %>%
+  kable(caption = "Comparação Intrasujeito entre o 1º Bloco (S1-S8) e o 2º Bloco (S9-S16)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+**O que os dados nos mostram:** Analisando a resposta de cada atleta em relação a si mesmo, observamos estabilidade nos indicadores. Embora a fadiga percebida e a dor muscular apresentem elevação numérica do primeiro para o segundo bloco de treino, essa oscilação manteve-se estatisticamente estável, demonstrando que os atletas conseguiram assimilar o acúmulo de carga na segunda metade da preparação sem sofrer picos de desgaste perceptivo.
+
+## Pergunta 3: Quais fatores perceptivos se associam ao tempo da maratona?
+
+**O que faz a Correlação de Spearman (**$r_s$)? Mede a força e a direção da associação entre duas variáveis. Varia de $-1$ a $+1$, onde valores próximos de zero indicam ausência de relação linear ou monotônica.
+
+```{r p3}
+res_p3 <- map_df(dominios, function(dom) {
+  cols <- names(df_all)[str_detect(names(df_all), paste0("^", dom, "_S"))]
+  media_dom <- rowMeans(df_all[, cols], na.rm = TRUE)
+  cor_res <- cor.test(media_dom, df_all$Maratona_Minutos, method = "spearman")
+  tibble(
+    Domínio = dom, 
+    `Rho de Spearman (r_s)` = round(cor_res$estimate, 3), 
+    `p-valor` = round(cor_res$p.value, 4),
+    `Significância` = if_else(cor_res$p.value < 0.05, "Significativo", "Não Significativo")
+  )
+})
+
+res_p3 %>%
+  kable(caption = "Correlação entre Indicadores Qualitativos e Tempo Total de Maratona (minutos)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+**O que os dados nos mostram:** A única variável perceptiva que apresentou associação significativa com o tempo total de maratona foi a presença de Momento Difícil ($r_s = -0,386$, com p-valor igual a $0,0427$). Atletas que relataram encarar momentos desafiadores com clareza mantiveram maior disciplina na gestão do ritmo de prova durante a maratona.
+
+# Bloco 2: Análises de Desempenho Físico e Maratona ($N = 30$)
+
+## Perguntas 4 e 5: A ordem dos treinos altera o resultado da Maratona por nível de rendimento?
+
+**O que faz o Teste T de Welch?** Compara as médias de dois grupos independentes sem exigir a premissa de que as populações tenham a mesma variância.
+
+```{r p4_p5}
+sub4 <- df_all %>% filter(Maratona_Minutos < 240)
+sup4 <- df_all %>% filter(Maratona_Minutos >= 240)
+
+t_sub4 <- t.test(Maratona_Minutos ~ Grupo, data = sub4)
+t_sup4 <- t.test(Maratona_Minutos ~ Grupo, data = sup4)
+
+res_subgrupos <- tibble(
+  Subgrupo = c("Sub-4 Horas (< 240 min)", "Acima de 4 Horas (>= 240 min)"),
+  `Média G1 (min)` = c(round(t_sub4$estimate[1], 1), round(t_sup4$estimate[1], 1)),
+  `Média G2 (min)` = c(round(t_sub4$estimate[2], 1), round(t_sup4$estimate[2], 1)),
+  `Diferença (min)` = c(round(t_sub4$estimate[1] - t_sub4$estimate[2], 1), round(t_sup4$estimate[1] - t_sup4$estimate[2], 1)),
+  `p-valor` = c(round(t_sub4$p.value, 4), round(t_sup4$p.value, 4)),
+  `Conclusão` = c("Significativo (G1 mais rápido)", "Não Significativo")
+)
+
+res_subgrupos %>%
+  kable(caption = "Comparação do Tempo de Maratona por Subgrupo de Rendimento") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+### Gráfico de desempenho na maratona
+
+```{r grafico_p4}
+df_all %>%
+  mutate(Categoria = if_else(Maratona_Minutos < 240, "Sub-4h (< 240 min)", "Acima de 4h (>= 240 min)")) %>%
+  ggplot(aes(x = Categoria, y = Maratona_Minutos, fill = Grupo)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_jitter(position = position_jitterdodge(jitter.width = 0.15), size = 2.5, alpha = 0.8) +
+  labs(
+    title = "Tempo de Conclusão da Maratona por Categoria de Rendimento",
+    subtitle = "Destaque para a vantagem do Grupo 1 entre os atletas Sub-4 horas",
+    x = "Categoria de Atleta",
+    y = "Tempo Total em Minutos",
+    fill = "Sequência"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set1")
+```
+
+**O que os dados nos mostram:** Para os maratonistas mais rápidos (Sub-4h), a ordem de treinamento provocou diferença significativa ($p = 0,01458$). Os atletas do Grupo 1 completaram a prova com tempo médio de $197,2$ minutos, aproximadamente 3 horas e 17 minutos, enquanto os do Grupo 2 registraram $218,6$ minutos, cerca de 3 horas e 38 minutos. Isso representa uma vantagem de $21,4$ minutos a favor da sequência A seguida de B. Para os atletas acima de 4 horas, a ordem não gerou variação significativa ($p = 0,4091$).
+
+## Perguntas 6 e 7: Como evolui o ritmo no 21km Time Trial e qual o impacto da ordem?
+
+```{r p6}
+tt_resumo <- df_quant %>%
+  group_by(Grupo) %>%
+  summarise(
+    `TT Semana 0 (Km/h)` = round(mean(TT_S0, na.rm=T), 2),
+    `TT Semana 8 (Km/h)` = round(mean(TT_S8, na.rm=T), 2),
+    `TT Semana 16 (Km/h)` = round(mean(TT_S16, na.rm=T), 2),
+    `Ganho Acumulado (Km/h)` = round(mean(TT_S16 - TT_S0, na.rm=T), 2)
+  )
+
+tt_resumo %>%
+  kable(caption = "Evolução da Velocidade Média no 21km Time Trial (Km/h)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+### Gráfico de Evolução de Todos os Atletas + Média Geral (Verde)
+
+```{r grafico_p6_espaguete}
+# Estruturação para gráfico de espagete com linha média em verde
+df_tt_long <- df_quant %>%
+  select(Codigo, Grupo, TT_S0, TT_S8, TT_S16) %>%
+  pivot_longer(cols = starts_with("TT_"), names_to = "Semana", values_to = "Velocidade") %>%
+  mutate(Semana_Num = case_when(
+    Semana == "TT_S0" ~ 0,
+    Semana == "TT_S8" ~ 8,
+    Semana == "TT_S16" ~ 16
+  ))
+
+ggplot(df_tt_long, aes(x = Semana_Num, y = Velocidade)) +
+  # Linhas individuais de cada um dos 30 atletas
+  geom_line(aes(group = Codigo), color = "grey75", alpha = 0.6, linewidth = 0.6) +
+  geom_point(color = "grey60", alpha = 0.5, size = 1.5) +
+  # Linha da evolução média geral destacada em verde
+  stat_summary(aes(group = 1), fun = mean, geom = "line", color = "#2ea043", linewidth = 1.8) +
+  stat_summary(aes(group = 1), fun = mean, geom = "point", color = "#2ea043", size = 4) +
+  scale_x_continuous(breaks = c(0, 8, 16), labels = c("Semana 0", "Semana 8", "Semana 16")) +
+  labs(
+    title = "Trajetória Individual dos 30 Atletas e Evolução Média Geral",
+    subtitle = "Linhas cinzas representam os atletas individuais; linha verde representa a média geral",
+    x = "Momento da Avaliação",
+    y = "Velocidade Média no 21km TT (Km/h)"
+  ) +
+  theme_minimal()
+```
+
+**O que os dados nos mostram:** Ao observar a trajetória individual de cada um dos 30 atletas junto da média geral em verde, fica claro a tendência de ganho progressivo na velocidade média da meia maratona ao longo das 16 semanas. O Grupo 1 apresentou ganho acumulado de $+0,99\text{ Km/h}$ e o Grupo 2 registrou $+0,87\text{ Km/h}$. O teste T na Semana 16 indicou p-valor igual a $0,2806$, demonstrando que a velocidade final atingida no 21km TT foi equivalente entre as duas metodologias.
+
+## Pergunta 8: Como se comportam os limiares fisiológicos $L_1$ e $L_2$?
+
+```{r p8}
+limiares_resumo <- df_quant %>%
+  group_by(Grupo) %>%
+  summarise(
+    `L1 Início (Km/h)` = round(mean(L1_S0, na.rm=T), 2), 
+    `L1 Fim (Km/h)` = round(mean(L1_S16, na.rm=T), 2),
+    `L2 Início (Km/h)` = round(mean(L2_S0, na.rm=T), 2), 
+    `L2 Fim (Km/h)` = round(mean(L2_S16, na.rm=T), 2)
+  )
+
+limiares_resumo %>%
+  kable(caption = "Deslocamento dos Limiares Aeróbio (L1) e Anaeróbio (L2)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+**O que os dados nos mostram:** Observa-se ganho de capacidade aeróbia. O limiar $L_1$, correspondente à velocidade de rodagem confortável, subiu de $11,50$ para $12,40\text{ Km/h}$ no Grupo 1 e de $11,00$ para $11,60\text{ Km/h}$ no Grupo 2. O limiar $L_2$, associado ao limiar anaeróbio, expandiu de forma semelhante em ambos os grupos, confirmando melhora nas zonas metabólicas.
+
+## Perguntas 9 e 10: Avaliação de Durabilidade e Perda de Velocidade Pós-Teste (TT vs Z1)
+
+**Entendendo o Teste de Durabilidade:** Compara-se a velocidade de um tiro de 1km realizado em estado descansado com outro tiro de 1km feito imediatamente após completar o teste de 21km. Quanto maior a porcentagem de queda, maior a perda de durabilidade neuromuscular.
+
+```{r p9_p10}
+df_quant$Queda_TT_Med <- rowMeans(df_quant[, c("Queda_1km_S8", "Queda_1km_S16")], na.rm = TRUE)
+df_quant$Queda_Z1_Med <- rowMeans(df_quant[, c("Queda_1km_S4", "Queda_1km_S12")], na.rm = TRUE)
+
+res_queda <- wilcox.test(df_quant$Queda_TT_Med, df_quant$Queda_Z1_Med, paired = TRUE)
+
+tibble(
+  Condicao = c("21km Time Trial (Ritmo Máximo - S8/S16)", "21km Zona 1 (Ritmo Contínuo - S4/S12)"),
+  Queda_Media = c(
+    paste0(round(mean(df_quant$Queda_TT_Med, na.rm=TRUE), 2), "%"), 
+    paste0(round(mean(df_quant$Queda_Z1_Med, na.rm=TRUE), 2), "%")
+  ),
+  P_Valor = c(round(res_queda$p.value, 4), round(res_queda$p.value, 4)),
+  Resultado = c("Significativo (p < 0,001)", "Significativo (p < 0,001)")
+) %>%
+  rename(
+    `Condição de Esforço` = Condicao,
+    `Queda Média no 1km` = Queda_Media,
+    `p-valor` = P_Valor,
+    `Conclusão` = Resultado
+  ) %>%
+  kable(caption = "Comparação do Impacto Neuromuscular do 21km TT contra 21km Z1") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+### Gráfico de Queda de Velocidade (Limite do Eixo Y em 30%)
+
+```{r grafico_p9_eixo30}
+df_quant %>%
+  select(Codigo, Queda_TT_Med, Queda_Z1_Med) %>%
+  pivot_longer(cols = c(Queda_TT_Med, Queda_Z1_Med), names_to = "Condicao", values_to = "Queda") %>%
+  mutate(Condicao = if_else(Condicao == "Queda_TT_Med", "21km Time Trial (TT)", "21km Zona 1 (Z1)")) %>%
+  ggplot(aes(x = Condicao, y = Queda, fill = Condicao)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_point(position = position_jitter(width = 0.1), size = 2, alpha = 0.6) +
+  coord_cartesian(ylim = c(0, 30)) +
+  scale_y_continuous(breaks = seq(0, 30, by = 5)) +
+  labs(
+    title = "Perda de Velocidade Pós-Esforço: 21km TT vs 21km Z1",
+    subtitle = "O esforço máximo do Time Trial causa quase o dobro de perda no tiro de 1km",
+    x = "Condição do Treino de 21km",
+    y = "Queda de Velocidade no Tiro (%)",
+    fill = "Condição"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2")
+```
+
+**O que os dados nos mostram:** Não houve diferença na durabilidade na Semana 16 entre os dois grupos ($p = 0,9834$). Por outro lado, o formato do treino provocou efeito direto: o 21km TT gerou queda de velocidade de $13,17\%$ no tiro de 1km pós-teste, em comparação a $7,37\%$ no 21km em Zona 1 ($p = 0,0001$). Essa variação comprova o grau de fadiga neuromuscular acumulado pelas avaliações em ritmo máximo.
+
+# Modelo Linear Misto das Velocidades nos 21km
+
+**O que faz o Modelo Linear Misto (lmer)?** Avalia a evolução contínua ao longo do tempo considerando que cada atleta possui seu próprio ponto de partida.
+
+## Cálculo do Modelo Misto
+### TT (S0, S8 e S16)
+```{r modelo_misto_TT}
+dados_longos_TT <- df_quant %>%
+  select(Codigo, Grupo, TT_S0, TT_S8, TT_S16) %>%
+  pivot_longer(
+    cols = c(TT_S0, TT_S8, TT_S16),
+    names_to = "semana",
+    values_to = "velocidade_21k"
+  ) %>%
+  mutate(
+    semana = factor(semana, levels = c("TT_S0", "TT_S8", "TT_S16")),
+    Grupo = factor(Grupo)
+  )
+
+modelo_misto_TT <- lmer(velocidade_21k ~ Grupo * semana + (1 | Codigo), data = dados_longos_TT)
+anova_res_TT <- anova(modelo_misto_TT)
+
+anova_res_TT %>%
+  as.data.frame() %>%
+  rownames_to_column("Efeito") %>%
+  kable(caption = "Tabela ANOVA do Modelo Linear Misto de velocidade") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+#### Gráfico do Modelo Misto
+
+```{r grafico_modelo}
+dados_longos_TT %>%
+  group_by(Grupo, semana) %>%
+  summarise(
+    media = mean(velocidade_21k, na.rm = TRUE),
+    se = sd(velocidade_21k, na.rm = TRUE) / sqrt(n()),
+    .groups = 'drop'
+  ) %>%
+  ggplot(aes(x = semana, y = media, color = Grupo, group = Grupo)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = media - se, ymax = media + se), width = 0.15) +
+  labs(
+    title = "Evolução da Velocidade Média nos 21km TT por sequência de treino",
+    subtitle = "Efeito significativo principal para o fator Semana (p < 0,0001)",
+    x = "Avaliação / semana",
+    y = "Velocidade média (Km/h)",
+    color = "Sequência"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+### Z1 (S4 e S12)
+```{r}
+dados_longos_Z1 <- df_quant %>%
+  select(Codigo, Grupo, Z1_S4, Z1_S12) %>%
+  pivot_longer(
+    cols = c(Z1_S4,  Z1_S12),
+    names_to = "semana",
+    values_to = "velocidade_21k"
+  ) %>%
+  mutate(
+    semana = factor(semana, levels = c( "Z1_S4",  "Z1_S12")),
+    Grupo = factor(Grupo)
+  )
+
+modelo_misto_Z1 <- lmer(velocidade_21k ~ Grupo * semana + (1 | Codigo), data = dados_longos_Z1)
+anova_res_Z1 <- anova(modelo_misto_Z1)
+
+anova_res_Z1 %>%
+  as.data.frame() %>%
+  rownames_to_column("Efeito") %>%
+  kable(caption = "Tabela ANOVA do Modelo Linear Misto de Velocidade") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+```{r grafico_modelo_z1}
+dados_longos_Z1 %>%
+  group_by(Grupo, semana) %>%
+  summarise(
+    media = mean(velocidade_21k, na.rm = TRUE),
+    se = sd(velocidade_21k, na.rm = TRUE) / sqrt(n()),
+    .groups = 'drop'
+  ) %>%
+  ggplot(aes(x = semana, y = media, color = Grupo, group = Grupo)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = media - se, ymax = media + se), width = 0.15) +
+  labs(
+    title = "Evolução da Velocidade Média nos 21km Z1 por sequência de treino",
+    subtitle = "Efeito significativo principal para o fator Semana (p < 0,0001)",
+    x = "Avaliação / semana",
+    y = "Velocidade média (Km/h)",
+    color = "Sequência"
+  ) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1")
+```
+
+**O que os dados nos mostram:** A análise do modelo misto confirma que a Semana de Treinamento é a variável principal da evolução dos atletas no Time Trail ($F = 37.89$, com p-valor menor que $0,0001$). Isso significa que a progressão planejada do macrociclo gerou ganhos contínuos no ritmo de corrida para a amostra geral dos 30 atletas.

@@ -1,0 +1,29 @@
+project:
+  type: book
+
+book:
+  title: "Relatório de análises - Movimenta UFPR"
+  author:  
+  - name: Ana Beatriz da Silva Marques
+    orcid: 0009-0005-0639-8325
+    affiliations: PET Estatística
+  - name: Alexandre Kobus
+  date: "8/12/2026"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+format:
+  html:
+    code-fold: true
+    code-summary: "Mostrar o código"
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

@@ -1,0 +1,10 @@
+# Introdução {.unnumbered}
+
+O projeto Movimenta UFPR acompanhou atletas ao longo de um programa estruturado de preparação dividido em dois blocos principais de treinamento. O primeiro bloco compreende da Semana 1 a 8 e o segundo bloco abrange da Semana 9 a 16.
+
+Os atletas foram divididos em duas sequências pedagógicas de treino:
+
+- **Grupo 1 (G1)**: Iniciou pela intervenção do Treino A no primeiro bloco e realizou o Treino B no segundo bloco.
+- **Grupo 2 (G2)**: Realizou a sequência inversa, aplicando o Treino B no primeiro bloco e o Treino A no segundo bloco.
+
+Neste relatório, integramos os dados de desempenho quantitativo ($N = 30$ atletas) com os dados de percepção qualitativa semanal ($N = 28$ atletas com acompanhamento de questionários completo) para responder a **10 perguntas científicas norteadoras**.
