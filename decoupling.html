@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Decoupling Fisiológico e Ritmo de Corrida – Relatório de análises - Movimenta UFPR</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./decoupling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Decoupling Fisiológico e Ritmo de Corrida</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Relatório de análises - Movimenta UFPR</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introdução</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Análise exploratória de dados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Perguntas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Achados e Recomedações</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./decoupling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Decoupling Fisiológico e Ritmo de Corrida</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introdução-e-contextualização-fisiológica" id="toc-introdução-e-contextualização-fisiológica" class="nav-link active" data-scroll-target="#introdução-e-contextualização-fisiológica"><span class="header-section-number">5</span> Introdução e Contextualização Fisiológica</a></li>
+  <li><a href="#carregamento-e-preparação-dos-dados" id="toc-carregamento-e-preparação-dos-dados" class="nav-link" data-scroll-target="#carregamento-e-preparação-dos-dados"><span class="header-section-number">6</span> Carregamento e Preparação dos Dados</a></li>
+  <li><a href="#mapeamento-dos-limiares-fisiológicos-l2-e-vc" id="toc-mapeamento-dos-limiares-fisiológicos-l2-e-vc" class="nav-link" data-scroll-target="#mapeamento-dos-limiares-fisiológicos-l2-e-vc"><span class="header-section-number">7</span> Mapeamento dos Limiares Fisiológicos (L2 e VC)</a>
+  <ul class="collapse">
+  <li><a href="#propriedade-matemática-da-magnitude-do-decoupling" id="toc-propriedade-matemática-da-magnitude-do-decoupling" class="nav-link" data-scroll-target="#propriedade-matemática-da-magnitude-do-decoupling"><span class="header-section-number">7.0.1</span> Propriedade Matemática da Magnitude do Decoupling</a></li>
+  </ul></li>
+  <li><a href="#extração-e-estruturação-das-métricas" id="toc-extração-e-estruturação-das-métricas" class="nav-link" data-scroll-target="#extração-e-estruturação-das-métricas"><span class="header-section-number">8</span> Extração e Estruturação das Métricas</a></li>
+  <li><a href="#resumo-dos-5-valores-de-tukey" id="toc-resumo-dos-5-valores-de-tukey" class="nav-link" data-scroll-target="#resumo-dos-5-valores-de-tukey"><span class="header-section-number">9</span> Resumo dos 5 Valores de Tukey</a>
+  <ul class="collapse">
+  <li><a href="#principais-insights-da-distribuição" id="toc-principais-insights-da-distribuição" class="nav-link" data-scroll-target="#principais-insights-da-distribuição"><span class="header-section-number">9.0.1</span> Principais Insights da Distribuição:</a></li>
+  </ul></li>
+  <li><a href="#comparação-entre-os-grupos-pedagógicos-g1-vs-g2" id="toc-comparação-entre-os-grupos-pedagógicos-g1-vs-g2" class="nav-link" data-scroll-target="#comparação-entre-os-grupos-pedagógicos-g1-vs-g2"><span class="header-section-number">10</span> Comparação entre os Grupos Pedagógicos (G1 vs G2)</a>
+  <ul class="collapse">
+  <li><a href="#discussão-dos-resultados" id="toc-discussão-dos-resultados" class="nav-link" data-scroll-target="#discussão-dos-resultados"><span class="header-section-number">10.0.1</span> Discussão dos Resultados:</a></li>
+  </ul></li>
+  <li><a href="#comportamento-por-desempenho-na-maratona-sub-4h-vs.-acima-de-4h" id="toc-comportamento-por-desempenho-na-maratona-sub-4h-vs.-acima-de-4h" class="nav-link" data-scroll-target="#comportamento-por-desempenho-na-maratona-sub-4h-vs.-acima-de-4h"><span class="header-section-number">11</span> Comportamento por Desempenho na Maratona (Sub-4h vs.&nbsp;Acima de 4h)</a>
+  <ul class="collapse">
+  <li><a href="#discussão" id="toc-discussão" class="nav-link" data-scroll-target="#discussão"><span class="header-section-number">11.0.1</span> Discussão:</a></li>
+  </ul></li>
+  <li><a href="#dinâmica-de-ritmo-velocidade-km-a-km-na-maratona" id="toc-dinâmica-de-ritmo-velocidade-km-a-km-na-maratona" class="nav-link" data-scroll-target="#dinâmica-de-ritmo-velocidade-km-a-km-na-maratona"><span class="header-section-number">12</span> Dinâmica de Ritmo (Velocidade Km a Km) na Maratona</a></li>
+  <li><a href="#conclusões-e-síntese-prática" id="toc-conclusões-e-síntese-prática" class="nav-link" data-scroll-target="#conclusões-e-síntese-prática"><span class="header-section-number">13</span> Conclusões e Síntese Prática</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Decoupling Fisiológico e Ritmo de Corrida</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução-e-contextualização-fisiológica" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Introdução e Contextualização Fisiológica</h1>
+<p>O treinamento para provas de longa duração (como a meia-maratona de 21 km e a maratona de 42 km) impõe demandas metabólicas e termorregulatórias severas ao organismo. Ao longo de uma corrida prolongada, atletas frequentemente experimentam o fenômeno de <strong>Deriva Cardiovascular</strong> (<em>cardiovascular drift</em>), que se traduz no <strong>desacoplamento aeróbio (decoupling fisiológico)</strong>:</p>
+<ol type="1">
+<li><strong>Carga Interna (Frequência Cardíaca - FC)</strong>: Tende a subir continuamente com o passar do tempo devido ao aumento da temperatura corporal, perda hídrica e maior fadiga neuromuscular.</li>
+<li><strong>Carga Externa (Velocidade ou Ritmo)</strong>: Tende a permanecer constante ou sofrer quedas à medida que a fadiga se acumula.</li>
+</ol>
+<div class="callout-box-success">
+<strong>O que o Decoupling nos diz sobre o Atleta?</strong><br> A razão entre a carga interna relativa (%FCmáx) e a carga externa relativa (%Limiar) quantifica a <em>durabilidade fisiológica</em>:
+<ul>
+<li>
+<strong>Decoupling Baixo (&lt; 5%)</strong>: O atleta mantém eficiência mecânica estável, com excelente capacidade de sustentação do ritmo sem estresse cardíaco desproporcional.
+</li>
+<li>
+<strong>Decoupling Moderado (5% a 10%)</strong>: Resposta adaptativa normal esperada para esforços de média/longa duração.
+</li>
+<li>
+<strong>Decoupling Elevado (&gt; 10%)</strong>: Perda severa de eficiência, indicando início precoce de fadiga e maior risco de quebra de ritmo (“muro”).
+</li>
+</ul>
+</div>
+<p>Adotando as metodologias de <strong>Smyth (2022)</strong> para a maratona e <strong>Wang (2026)</strong> para a meia-maratona, avaliamos o comportamento da magnitude do decoupling e o momento do seu início (<em>onset</em>), comparando os grupos pedagógicos (<strong>Grupo 1 vs.&nbsp;Grupo 2</strong>) e os grupos por tempo de conclusão (<strong>Sub-4h vs.&nbsp;Acima de 4h</strong>).</p>
+<hr>
+</section>
+<section id="carregamento-e-preparação-dos-dados" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Carregamento e Preparação dos Dados</h1>
+<p>Para garantir robustez e evitar conflitos em tabelas com cabeçalhos duplos e colunas repetidas no Excel, o script R realiza a leitura bruta sem suposições rígidas de nomes, indexando os dados e classificando os atletas.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Carregar pacotes essenciais</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>excel_path <span class="ot">&lt;-</span> <span class="st">"Estatísitca - Maratona, TT1, TT2, TT3, Z1_1 e Z1_2.xlsx"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Carregar metadados dos sujeitos da aba de controle</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df_control <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(excel_path, <span class="at">sheet =</span> <span class="st">"Controle dos sujeitos"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df_meta_raw <span class="ot">&lt;-</span> df_control[<span class="dv">3</span><span class="sc">:</span><span class="fu">nrow</span>(df_control), ]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_meta_raw) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Col"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df_meta_raw))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpar e classificar os atletas por tempo de maratona (Sub-4h vs Above-4h)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df_meta <span class="ot">&lt;-</span> df_meta_raw <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Grupo =</span> <span class="fu">factor</span>(Col1),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Codigo =</span> Col2,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Nome =</span> Col3,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">HRmax =</span> <span class="fu">as.numeric</span>(Col10),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">VC_S4 =</span> <span class="fu">as.numeric</span>(Col11),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">VC_S12 =</span> <span class="fu">as.numeric</span>(Col12),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_S0 =</span> <span class="fu">as.numeric</span>(Col13),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_S8 =</span> <span class="fu">as.numeric</span>(Col14),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_S16 =</span> <span class="fu">as.numeric</span>(Col15),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># O tempo no Excel é fração de dia; multiplicamos por 1440 para obter minutos</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maratona_Minutos =</span> <span class="fu">as.numeric</span>(Col4) <span class="sc">*</span> <span class="dv">1440</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maratona_Horas =</span> Maratona_Minutos <span class="sc">/</span> <span class="dv">60</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tempo_Grupo =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(Maratona_Minutos <span class="sc">&lt;</span> <span class="dv">240</span>, <span class="st">"Sub-4h"</span>, <span class="st">"Above-4h"</span>), </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Sub-4h"</span>, <span class="st">"Above-4h"</span>))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Codigo)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Codigo, Nome, Grupo, HRmax, VC_S4, VC_S12, L2_S0, L2_S8, L2_S16, </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>         Maratona_Minutos, Maratona_Horas, Tempo_Grupo)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Paletas de cores institucionais para os gráficos</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>colors_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"G1"</span> <span class="ot">=</span> <span class="st">"#2ea043"</span>, <span class="st">"G2"</span> <span class="ot">=</span> <span class="st">"#0056b3"</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>colors_t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sub-4h"</span> <span class="ot">=</span> <span class="st">"#e76f51"</span>, <span class="st">"Above-4h"</span> <span class="ot">=</span> <span class="st">"#264653"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>A base de controle contempla <strong>30 atletas</strong> avaliados: * <strong>Grupos Pedagógicos</strong>: 16 corredores no <strong>Grupo 1</strong> (Treino A <span class="math inline">\(\rightarrow\)</span> Treino B) e 14 corredores no <strong>Grupo 2</strong> (Treino B <span class="math inline">\(\rightarrow\)</span> Treino A). * <strong>Desempenho na Maratona</strong>: 20 corredores concluíram a prova abaixo de 4 horas (<strong>Sub-4h</strong>) e 7 corredores concluíram acima de 4 horas (<strong>Acima de 4h</strong>).</p>
+<hr>
+</section>
+<section id="mapeamento-dos-limiares-fisiológicos-l2-e-vc" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Mapeamento dos Limiares Fisiológicos (L2 e VC)</h1>
+<p>À medida que os atletas progridem nas semanas de treino, suas capacidades fisiológicas se modificam. Portanto, para calcular a carga externa relativa (%L2 ou %VC), cada avaliação de 21 km ou teste de zona 1 precisa ser pareada com o limiar avaliado no momento mais próximo:</p>
+<table class="table table-striped table-hover table-bordered">
+<thead style="background-color: #2c3e50; color: white;">
+<tr>
+<th>
+Avaliação / Teste
+</th>
+<th>
+Semana de Treino
+</th>
+<th>
+Limiar L2 Utilizado
+</th>
+<th>
+Limiar VC Utilizado
+</th>
+<th>
+Racional Fisiológico
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>TT1</strong>
+</td>
+<td>
+Semana 0 (Baseline)
+</td>
+<td>
+<code>L2_S0</code>
+</td>
+<td>
+<code>VC_S4</code>
+</td>
+<td>
+L2 inicial do baseline; usa a 1ª medição de VC disponível (Semana 4).
+</td>
+</tr>
+<tr>
+<td>
+<strong>Z1_1</strong>
+</td>
+<td>
+Semana 4
+</td>
+<td>
+<code>L2_S0</code>
+</td>
+<td>
+<code>VC_S4</code>
+</td>
+<td>
+L2 mais recente disponível (S0) e medição concorrente de VC (S4).
+</td>
+</tr>
+<tr>
+<td>
+<strong>TT2</strong>
+</td>
+<td>
+Semana 8 (Intermediário)
+</td>
+<td>
+<code>L2_S8</code>
+</td>
+<td>
+<code>VC_S4</code>
+</td>
+<td>
+L2 reavaliado na Semana 8 e VC vigente desde a Semana 4.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Z1_2</strong>
+</td>
+<td>
+Semana 12
+</td>
+<td>
+<code>L2_S8</code>
+</td>
+<td>
+<code>VC_S12</code>
+</td>
+<td>
+L2 da Semana 8 e medição concorrente de VC da Semana 12.
+</td>
+</tr>
+<tr>
+<td>
+<strong>TT3</strong>
+</td>
+<td>
+Semana 16 (Final)
+</td>
+<td>
+<code>L2_S16</code>
+</td>
+<td>
+<code>VC_S12</code>
+</td>
+<td>
+L2 final da Semana 16 e VC vigente desde a Semana 12.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Maratona</strong>
+</td>
+<td>
+Semana 18 (Competição)
+</td>
+<td>
+<code>L2_S16</code>
+</td>
+<td>
+<code>VC_S12</code>
+</td>
+<td>
+Limiares consolidados ao final do macrociclo de preparação.
+</td>
+</tr>
+</tbody>
+</table>
+<section id="propriedade-matemática-da-magnitude-do-decoupling" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="propriedade-matemática-da-magnitude-do-decoupling"><span class="header-section-number">7.0.1</span> Propriedade Matemática da Magnitude do Decoupling</h3>
+<p>Um achado metodológico muito relevante é que a <strong>Magnitude de Decoupling</strong> é matematicamente <strong>idêntica</strong> quer seja calculada em relação ao Limiar Anaeróbio (L2) ou à Velocidade Crítica (VC).</p>
+<p>A magnitude é dada pela razão entre os índices de esforço do trecho final e do trecho inicial da corrida: <span class="math display">\[\text{Magnitude} = \frac{\text{Razão}_{\text{Final}}}{\text{Razão}_{\text{Inicial}}} = \frac{\frac{FC_{\text{Final}} / FC_{\text{máx}}}{Vel_{\text{Final}} / Limiar}}{\frac{FC_{\text{Inicial}} / FC_{\text{máx}}}{Vel_{\text{Inicial}} / Limiar}} = \frac{FC_{\text{Final}} / Vel_{\text{Final}}}{FC_{\text{Inicial}} / Vel_{\text{Inicial}}}\]</span></p>
+<p>Os fatores constantes (<span class="math inline">\(FC_{\text{máx}}\)</span> e <span class="math inline">\(Limiar\)</span>) <strong>cancelam-se na divisão</strong>. Consequentemente: * A <strong>Magnitude de Decoupling</strong> mede o desvio fisiológico líquido da relação FC/Velocidade. * O <strong>Início (Onset)</strong> do desacoplamento, por outro lado, <strong>varia entre L2 e VC</strong>, pois a detecção ocorre quando a razão acumulada ultrapassa o limiar absoluto fixado em <span class="math inline">\(1,025\)</span> (<span class="math inline">\(2,5\%\)</span> de deriva). Como a velocidade relativa em %VC é numericamente diferente da em %L2, esse limiar fixo é atingido em quilômetros distintos.</p>
+<hr>
+</section>
+</section>
+<section id="extração-e-estruturação-das-métricas" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Extração e Estruturação das Métricas</h1>
+<p>Executamos a extração padronizada de todas as abas da planilha:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>extract_decoupling_metrics <span class="ot">&lt;-</span> <span class="cf">function</span>(sheet_name, mag_l2_idx, onset_l2_idx, mag_vc_idx, onset_vc_idx) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  df_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(excel_path, <span class="at">sheet =</span> sheet_name, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(df_raw) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Col"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df_raw))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  data_rows <span class="ot">&lt;-</span> df_raw[<span class="dv">3</span><span class="sc">:</span><span class="fu">nrow</span>(df_raw), ]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  df_metrics <span class="ot">&lt;-</span> data_rows <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Col1)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Codigo =</span> Col1,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">Mag_L2 =</span> <span class="fu">as.numeric</span>(<span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">"Col"</span>, mag_l2_idx))),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">Onset_L2 =</span> <span class="fu">as.numeric</span>(<span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">"Col"</span>, onset_l2_idx))),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">Mag_VC =</span> <span class="fu">as.numeric</span>(<span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">"Col"</span>, mag_vc_idx))),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">Onset_VC =</span> <span class="fu">as.numeric</span>(<span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">"Col"</span>, onset_vc_idx)))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Codigo, Mag_L2, Onset_L2, Mag_VC, Onset_VC)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df_metrics)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Extração de cada teste</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>mara_dec  <span class="ot">&lt;-</span> <span class="fu">extract_decoupling_metrics</span>(<span class="st">"Decoupling_Maratona"</span>, <span class="dv">54</span>, <span class="dv">55</span>, <span class="dv">107</span>, <span class="dv">108</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="st">"Marathon"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>tt1_dec   <span class="ot">&lt;-</span> <span class="fu">extract_decoupling_metrics</span>(<span class="st">"Decoupling_TT1"</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">69</span>, <span class="dv">70</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="st">"TT1"</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>tt2_dec   <span class="ot">&lt;-</span> <span class="fu">extract_decoupling_metrics</span>(<span class="st">"Decoupling_TT2"</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">69</span>, <span class="dv">70</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="st">"TT2"</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>tt3_dec   <span class="ot">&lt;-</span> <span class="fu">extract_decoupling_metrics</span>(<span class="st">"Decoupling_TT3"</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">69</span>, <span class="dv">70</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="st">"TT3"</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>z1_1_dec  <span class="ot">&lt;-</span> <span class="fu">extract_decoupling_metrics</span>(<span class="st">"Decoupling_Z1_1"</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">69</span>, <span class="dv">70</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="st">"Z1_1"</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>z1_2_dec  <span class="ot">&lt;-</span> <span class="fu">extract_decoupling_metrics</span>(<span class="st">"Decoupling_Z1_2"</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">69</span>, <span class="dv">70</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="st">"Z1_2"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Consolidação final</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>all_dec <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(tt1_dec, tt2_dec, tt3_dec, z1_1_dec, z1_2_dec, mara_dec)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>df_analysis <span class="ot">&lt;-</span> df_meta <span class="sc">%&gt;%</span> <span class="fu">inner_join</span>(all_dec, <span class="at">by =</span> <span class="st">"Codigo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="resumo-dos-5-valores-de-tukey" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Resumo dos 5 Valores de Tukey</h1>
+<p>Os <strong>5 Valores de Tukey</strong> (Mínimo, 1º Quartil, Mediana, 3º Quartil e Máximo) fornecem uma visão abrangente sobre a dispersão do desacoplamento aeróbio e a robustez dos atletas:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tukey_summaries <span class="ot">&lt;-</span> df_analysis <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Test) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_Mag_Min =</span> <span class="fu">fivenum</span>(Mag_L2)[<span class="dv">1</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_Mag_Q1  =</span> <span class="fu">fivenum</span>(Mag_L2)[<span class="dv">2</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_Mag_Med =</span> <span class="fu">fivenum</span>(Mag_L2)[<span class="dv">3</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_Mag_Q3  =</span> <span class="fu">fivenum</span>(Mag_L2)[<span class="dv">4</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_Mag_Max =</span> <span class="fu">fivenum</span>(Mag_L2)[<span class="dv">5</span>],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">L2_Ons_Med =</span> <span class="fu">fivenum</span>(Onset_L2)[<span class="dv">3</span>],</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">VC_Ons_Med =</span> <span class="fu">fivenum</span>(Onset_VC)[<span class="dv">3</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tukey_summaries, </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Avaliação"</span>, <span class="st">"Mínimo"</span>, <span class="st">"1º Quartil (Q1)"</span>, <span class="st">"Mediana"</span>, </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"3º Quartil (Q3)"</span>, <span class="st">"Máximo"</span>, <span class="st">"Onset L2 (Med)"</span>, <span class="st">"Onset VC (Med)"</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>, </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Tabela 1: Resumo dos 5 Valores de Tukey para Magnitude e Início do Decoupling"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small">
+<caption>Tabela 1: Resumo dos 5 Valores de Tukey para Magnitude e Início do Decoupling</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Avaliação</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mínimo</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">1º Quartil (Q1)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mediana</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">3º Quartil (Q3)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Máximo</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Onset L2 (Med)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Onset VC (Med)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Marathon</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">1.070</td>
+<td style="text-align: right;">1.097</td>
+<td style="text-align: right;">1.206</td>
+<td style="text-align: right;">1.347</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TT1</td>
+<td style="text-align: right;">1.006</td>
+<td style="text-align: right;">1.067</td>
+<td style="text-align: right;">1.114</td>
+<td style="text-align: right;">1.197</td>
+<td style="text-align: right;">1.412</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TT2</td>
+<td style="text-align: right;">0.905</td>
+<td style="text-align: right;">1.060</td>
+<td style="text-align: right;">1.094</td>
+<td style="text-align: right;">1.157</td>
+<td style="text-align: right;">1.216</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TT3</td>
+<td style="text-align: right;">0.895</td>
+<td style="text-align: right;">1.013</td>
+<td style="text-align: right;">1.067</td>
+<td style="text-align: right;">1.133</td>
+<td style="text-align: right;">1.491</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Z1_1</td>
+<td style="text-align: right;">0.871</td>
+<td style="text-align: right;">1.034</td>
+<td style="text-align: right;">1.088</td>
+<td style="text-align: right;">1.158</td>
+<td style="text-align: right;">1.953</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Z1_2</td>
+<td style="text-align: right;">0.894</td>
+<td style="text-align: right;">0.996</td>
+<td style="text-align: right;">1.041</td>
+<td style="text-align: right;">1.105</td>
+<td style="text-align: right;">1.408</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="principais-insights-da-distribuição" class="level3" data-number="9.0.1">
+<h3 data-number="9.0.1" class="anchored" data-anchor-id="principais-insights-da-distribuição"><span class="header-section-number">9.0.1</span> Principais Insights da Distribuição:</h3>
+<ul>
+<li><strong>Maratona</strong>: A mediana de desacoplamento foi de <strong><span class="math inline">\(1,097\)</span></strong> (aproximadamente <span class="math inline">\(9,7\%\)</span> de deriva cardiovascular), considerada moderada segundo os critérios de Smyth (2022). No entanto, <span class="math inline">\(25\%\)</span> dos atletas (acima do <span class="math inline">\(Q3 = 1,206\)</span>) sofreram desacoplamento severo (<span class="math inline">\(&gt; 20\%\)</span>).</li>
+<li><strong>Início Precoce</strong>: Na Maratona, a mediana do <em>onset</em> de decoupling ocorreu no <strong>Segmento 2 (5 a 10 km)</strong>, indicando que a deriva cardiovascular se inicia nos estágios iniciais para a maioria dos atletas amadores.</li>
+<li><strong>Evolução nos 21 km</strong>: A mediana da magnitude de decoupling nos testes de 21 km diminuiu de <strong><span class="math inline">\(1,114\)</span></strong> no TT1 para <strong><span class="math inline">\(1,094\)</span></strong> no TT2 e <strong><span class="math inline">\(1,067\)</span></strong> no TT3, demonstrando ganho claro de eficiência e durabilidade cardiovascular ao longo das 16 semanas.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="comparação-entre-os-grupos-pedagógicos-g1-vs-g2" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Comparação entre os Grupos Pedagógicos (G1 vs G2)</h1>
+<p>O estudo adotou um modelo cruzado onde o <strong>Grupo 1 (G1)</strong> realizou Treino A <span class="math inline">\(\rightarrow\)</span> Treino B e o <strong>Grupo 2 (G2)</strong> realizou Treino B <span class="math inline">\(\rightarrow\)</span> Treino A. Avaliamos se a ordem de aplicação dos treinos gerou diferenças na durabilidade:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>group_comparisons <span class="ot">&lt;-</span> df_analysis <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Test) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>({</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> .</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    tt_mag_l2 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">t.test</span>(Mag_L2 <span class="sc">~</span> Grupo, <span class="at">data =</span> d)<span class="sc">$</span>p.value, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA_real_</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    wt_mag_l2 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">wilcox.test</span>(Mag_L2 <span class="sc">~</span> Grupo, <span class="at">data =</span> d)<span class="sc">$</span>p.value, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA_real_</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    tt_ons_vc <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">t.test</span>(Onset_VC <span class="sc">~</span> Grupo, <span class="at">data =</span> d)<span class="sc">$</span>p.value, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA_real_</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">G1_Mag_L2 =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Mag_L2[d<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">"G1"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">G2_Mag_L2 =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Mag_L2[d<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">"G2"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_val_Mag =</span> wt_mag_l2,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">G1_Ons_VC =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Onset_VC[d<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">"G1"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">G2_Ons_VC =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Onset_VC[d<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">"G2"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_val_Onset =</span> tt_ons_vc</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(group_comparisons, </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Avaliação"</span>, <span class="st">"Média G1 (Mag)"</span>, <span class="st">"Média G2 (Mag)"</span>, <span class="st">"p-valor (Mag)"</span>, </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Onset Médio G1 (VC)"</span>, <span class="st">"Onset Médio G2 (VC)"</span>, <span class="st">"p-valor (Onset)"</span>),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>, </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Tabela 2: Comparações Estatísticas de Decoupling entre G1 e G2 (Testes de Wilcoxon e t de Student)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small">
+<caption>Tabela 2: Comparações Estatísticas de Decoupling entre G1 e G2 (Testes de Wilcoxon e t de Student)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Avaliação</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Média G1 (Mag)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Média G2 (Mag)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p-valor (Mag)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Onset Médio G1 (VC)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Onset Médio G2 (VC)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p-valor (Onset)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Marathon</td>
+<td style="text-align: right;">1.119</td>
+<td style="text-align: right;">1.143</td>
+<td style="text-align: right;">0.886</td>
+<td style="text-align: right;">3.071</td>
+<td style="text-align: right;">3.273</td>
+<td style="text-align: right;">0.857</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TT1</td>
+<td style="text-align: right;">1.092</td>
+<td style="text-align: right;">1.197</td>
+<td style="text-align: right;">0.031</td>
+<td style="text-align: right;">2.333</td>
+<td style="text-align: right;">5.375</td>
+<td style="text-align: right;">0.033</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TT2</td>
+<td style="text-align: right;">1.093</td>
+<td style="text-align: right;">1.097</td>
+<td style="text-align: right;">0.776</td>
+<td style="text-align: right;">2.077</td>
+<td style="text-align: right;">3.455</td>
+<td style="text-align: right;">0.355</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TT3</td>
+<td style="text-align: right;">1.096</td>
+<td style="text-align: right;">1.057</td>
+<td style="text-align: right;">0.841</td>
+<td style="text-align: right;">1.786</td>
+<td style="text-align: right;">1.455</td>
+<td style="text-align: right;">0.770</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Z1_1</td>
+<td style="text-align: right;">1.114</td>
+<td style="text-align: right;">1.243</td>
+<td style="text-align: right;">0.062</td>
+<td style="text-align: right;">3.400</td>
+<td style="text-align: right;">3.778</td>
+<td style="text-align: right;">0.788</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Z1_2</td>
+<td style="text-align: right;">1.049</td>
+<td style="text-align: right;">1.057</td>
+<td style="text-align: right;">0.645</td>
+<td style="text-align: right;">1.538</td>
+<td style="text-align: right;">2.667</td>
+<td style="text-align: right;">0.248</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="discussão-dos-resultados" class="level3" data-number="10.0.1">
+<h3 data-number="10.0.1" class="anchored" data-anchor-id="discussão-dos-resultados"><span class="header-section-number">10.0.1</span> Discussão dos Resultados:</h3>
+<ol type="1">
+<li><strong>Diferença Inicial de Baseline (TT1 - Semana 0)</strong>: Antes de iniciar a periodização, o Grupo 2 apresentou magnitude de decoupling significativamente mais elevada que o Grupo 1 (<span class="math inline">\(1,197 \pm 0,21\)</span> vs.&nbsp;<span class="math inline">\(1,092 \pm 0,17\)</span>; <span class="math inline">\(p = 0,031\)</span> no teste de Wilcoxon).</li>
+<li><strong>Equalização pela Intervenção (TT2 e TT3)</strong>: Nas Semanas 8 e 16, as diferenças entre os grupos desapareceram completamente (<span class="math inline">\(p = 0,776\)</span> no TT2 e <span class="math inline">\(p = 0,841\)</span> no TT3). Ambas as estruturas pedagógicas foram eficientes em harmonizar a durabilidade sob esforço.</li>
+<li><strong>Maratona</strong>: Na prova principal de 42 km, G1 e G2 apresentaram magnitudes de decoupling praticamente idênticas (<span class="math inline">\(1,119\)</span> vs.&nbsp;<span class="math inline">\(1,143\)</span>; <span class="math inline">\(p = 0,886\)</span>).</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_tt <span class="ot">&lt;-</span> df_analysis <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Test <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"TT1"</span>, <span class="st">"TT2"</span>, <span class="st">"TT3"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Test =</span> <span class="fu">factor</span>(Test, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"TT1"</span>, <span class="st">"TT2"</span>, <span class="st">"TT3"</span>), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Semana 0 (TT1)"</span>, <span class="st">"Semana 8 (TT2)"</span>, <span class="st">"Semana 16 (TT3)"</span>)))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_tt, <span class="fu">aes</span>(<span class="at">x =</span> Test, <span class="at">y =</span> Mag_L2, <span class="at">fill =</span> Grupo)) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">outlier.size =</span> <span class="fl">2.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.8</span>)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Grupo), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">2</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.15</span>, <span class="at">dodge.width =</span> <span class="fl">0.8</span>)) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> colors_g) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors_g) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Evolução da Magnitude de Decoupling nos 21 km"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Comparação entre os Grupos Pedagógicos G1 e G2"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Momento da Avaliação"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Magnitude de Decoupling (L2, AU)"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Grupo"</span>, <span class="at">color =</span> <span class="st">"Grupo"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="decoupling_files/figure-html/boxplots_grupo-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Figura 1: Evolução Temporal da Magnitude de Decoupling nos testes de 21 km (TT1, TT2 e TT3) comparando os Grupos 1 e 2.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="comportamento-por-desempenho-na-maratona-sub-4h-vs.-acima-de-4h" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Comportamento por Desempenho na Maratona (Sub-4h vs.&nbsp;Acima de 4h)</h1>
+<p>Investigamos se atletas que completam a maratona abaixo de 4 horas (<strong>Sub-4h</strong>, <span class="math inline">\(n=20\)</span>) possuem dinâmicas de desacoplamento distintas daqueles que completam acima de 4 horas (<strong>Acima de 4h</strong>, <span class="math inline">\(n=7\)</span>):</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>time_comparisons <span class="ot">&lt;-</span> df_analysis <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Test) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>({</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> .</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    tt_mag_l2 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">t.test</span>(Mag_L2 <span class="sc">~</span> Tempo_Grupo, <span class="at">data =</span> d)<span class="sc">$</span>p.value, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA_real_</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    wt_mag_l2 <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">wilcox.test</span>(Mag_L2 <span class="sc">~</span> Tempo_Grupo, <span class="at">data =</span> d)<span class="sc">$</span>p.value, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA_real_</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    tt_ons_vc <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">t.test</span>(Onset_VC <span class="sc">~</span> Tempo_Grupo, <span class="at">data =</span> d)<span class="sc">$</span>p.value, <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NA_real_</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Sub4_Mag_L2 =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Mag_L2[d<span class="sc">$</span>Tempo_Grupo <span class="sc">==</span> <span class="st">"Sub-4h"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">Abv4_Mag_L2 =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Mag_L2[d<span class="sc">$</span>Tempo_Grupo <span class="sc">==</span> <span class="st">"Above-4h"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_val_Mag =</span> wt_mag_l2,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">Sub4_Ons_VC =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Onset_VC[d<span class="sc">$</span>Tempo_Grupo <span class="sc">==</span> <span class="st">"Sub-4h"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">Abv4_Ons_VC =</span> <span class="fu">mean</span>(d<span class="sc">$</span>Onset_VC[d<span class="sc">$</span>Tempo_Grupo <span class="sc">==</span> <span class="st">"Above-4h"</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_val_Onset =</span> tt_ons_vc</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(time_comparisons, </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Avaliação"</span>, <span class="st">"Média Sub-4h (Mag)"</span>, <span class="st">"Média Acima 4h (Mag)"</span>, <span class="st">"p-valor (Mag)"</span>, </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Onset Médio Sub-4h (VC)"</span>, <span class="st">"Onset Médio Acima 4h (VC)"</span>, <span class="st">"p-valor (Onset)"</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">3</span>, </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Tabela 3: Comparações de Decoupling de acordo com o Tempo de Conclusão da Maratona"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top table-sm small">
+<caption>Tabela 3: Comparações de Decoupling de acordo com o Tempo de Conclusão da Maratona</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Avaliação</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Média Sub-4h (Mag)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Média Acima 4h (Mag)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p-valor (Mag)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Onset Médio Sub-4h (VC)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Onset Médio Acima 4h (VC)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">p-valor (Onset)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Marathon</td>
+<td style="text-align: right;">1.137</td>
+<td style="text-align: right;">1.111</td>
+<td style="text-align: right;">0.901</td>
+<td style="text-align: right;">3.444</td>
+<td style="text-align: right;">2.429</td>
+<td style="text-align: right;">0.347</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TT1</td>
+<td style="text-align: right;">1.134</td>
+<td style="text-align: right;">1.135</td>
+<td style="text-align: right;">0.494</td>
+<td style="text-align: right;">3.786</td>
+<td style="text-align: right;">3.000</td>
+<td style="text-align: right;">0.671</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TT2</td>
+<td style="text-align: right;">1.096</td>
+<td style="text-align: right;">1.070</td>
+<td style="text-align: right;">0.177</td>
+<td style="text-align: right;">2.176</td>
+<td style="text-align: right;">3.667</td>
+<td style="text-align: right;">0.392</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TT3</td>
+<td style="text-align: right;">1.100</td>
+<td style="text-align: right;">1.077</td>
+<td style="text-align: right;">0.842</td>
+<td style="text-align: right;">1.824</td>
+<td style="text-align: right;">0.400</td>
+<td style="text-align: right;">0.101</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Z1_1</td>
+<td style="text-align: right;">1.186</td>
+<td style="text-align: right;">1.128</td>
+<td style="text-align: right;">0.780</td>
+<td style="text-align: right;">2.562</td>
+<td style="text-align: right;">6.500</td>
+<td style="text-align: right;">0.020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Z1_2</td>
+<td style="text-align: right;">1.048</td>
+<td style="text-align: right;">1.090</td>
+<td style="text-align: right;">0.197</td>
+<td style="text-align: right;">1.375</td>
+<td style="text-align: right;">4.400</td>
+<td style="text-align: right;">0.020</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="discussão" class="level3" data-number="11.0.1">
+<h3 data-number="11.0.1" class="anchored" data-anchor-id="discussão"><span class="header-section-number">11.0.1</span> Discussão:</h3>
+<ul>
+<li><strong>Magnitude Global na Maratona</strong>: Não houve diferença na magnitude de decoupling final da maratona entre os grupos de tempo (<span class="math inline">\(1,137\)</span> vs.&nbsp;<span class="math inline">\(1,111\)</span>; <span class="math inline">\(p = 0,901\)</span>). Ambos os subgrupos experimentam proporções semelhantes de deriva cardiovascular acumulada no final dos 42 km.</li>
+<li><strong>Início (<em>Onset</em>) nos Treinos Moderados (Zona 1)</strong>: Nos treinos de intensidade controlada Z1, os atletas mais rápidos (<strong>Sub-4h</strong>) iniciaram o desacoplamento <strong>significativamente mais cedo</strong> em relação à Velocidade Crítica:
+<ul>
+<li><strong>Z1_1 (Semana 4)</strong>: Onset em <span class="math inline">\(2,56\)</span> segmentos vs.&nbsp;<span class="math inline">\(6,50\)</span> segmentos no grupo mais lento (<span class="math inline">\(p = 0,020\)</span>).</li>
+<li><strong>Z1_2 (Semana 12)</strong>: Onset em <span class="math inline">\(1,38\)</span> segmentos vs.&nbsp;<span class="math inline">\(4,40\)</span> segmentos no grupo mais lento (<span class="math inline">\(p = 0,020\)</span>).</li>
+</ul></li>
+</ul>
+<p>Esse comportamento reflete adaptações termorregulatórias e autonômicas mais dinâmicas no grupo mais rápido, onde a FC responde prontamente à elevação inicial de temperatura corporal antes de atingir um platô estável.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_mara <span class="ot">&lt;-</span> df_analysis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Test <span class="sc">==</span> <span class="st">"Marathon"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_mara, <span class="fu">aes</span>(<span class="at">x =</span> Tempo_Grupo, <span class="at">y =</span> Mag_L2, <span class="at">fill =</span> Tempo_Grupo)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">outlier.shape =</span> <span class="dv">16</span>, <span class="at">width =</span> <span class="fl">0.45</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">color =</span> Tempo_Grupo)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> colors_t) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors_t) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Magnitude de Decoupling Fisiológico na Maratona"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Comparação entre Atletas Sub-4h e Acima de 4h"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Grupo de Tempo de Conclusão"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Magnitude de Decoupling (L2, AU)"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="decoupling_files/figure-html/boxplots_tempo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figura 2: Magnitude de Decoupling Fisiológico na Maratona entre atletas Sub-4h e Acima de 4h.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="dinâmica-de-ritmo-velocidade-km-a-km-na-maratona" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Dinâmica de Ritmo (Velocidade Km a Km) na Maratona</h1>
+<p>Avaliamos se a forma como os atletas distribuíram o ritmo ao longo dos 42 km da prova diferiu entre as sequências pedagógicas <span class="math inline">\(G1\)</span> e <span class="math inline">\(G2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_vel_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(excel_path, <span class="at">sheet =</span> <span class="st">"Velocidade_Maratona_1_2_3"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>headers_vel_row1 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df_vel_raw[<span class="dv">1</span>, ])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>headers_vel_row2 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df_vel_raw[<span class="dv">2</span>, ])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>col_names_vel <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">ncol</span>(df_vel_raw))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>current_sec <span class="ot">&lt;-</span> <span class="st">"Abs"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df_vel_raw)) {</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  h1 <span class="ot">&lt;-</span> headers_vel_row1[i]</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  h2 <span class="ot">&lt;-</span> headers_vel_row2[i]</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(h1)) {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">"absoluto"</span>, h1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) current_sec <span class="ot">&lt;-</span> <span class="st">"Abs"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">"L2"</span>, h1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) current_sec <span class="ot">&lt;-</span> <span class="st">"L2"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">"crítica|VC"</span>, h1, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) current_sec <span class="ot">&lt;-</span> <span class="st">"VC"</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  base_n <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(h2), <span class="fu">paste0</span>(<span class="st">"Col"</span>, i), h2)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">1</span>) col_names_vel[i] <span class="ot">&lt;-</span> <span class="st">"Codigo"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">2</span>) col_names_vel[i] <span class="ot">&lt;-</span> <span class="st">"ID"</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">"^KM"</span>, base_n)) col_names_vel[i] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(base_n, <span class="st">"_"</span>, current_sec)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> col_names_vel[i] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(base_n, <span class="st">"_"</span>, current_sec, <span class="st">"_"</span>, i)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>df_vel_data <span class="ot">&lt;-</span> df_vel_raw[<span class="dv">3</span><span class="sc">:</span><span class="fu">nrow</span>(df_vel_raw), ]</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_vel_data) <span class="ot">&lt;-</span> col_names_vel</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>df_vel_clean <span class="ot">&lt;-</span> df_vel_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Codigo)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Grupo =</span> <span class="fu">substr</span>(Codigo, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Grupo <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"G1"</span>, <span class="st">"G2"</span>))</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>numeric_cols_vel <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df_vel_clean)[<span class="dv">3</span><span class="sc">:</span>(<span class="fu">ncol</span>(df_vel_clean)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>df_vel_clean <span class="ot">&lt;-</span> df_vel_clean <span class="sc">%&gt;%</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(numeric_cols_vel), <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(.))))</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>km_abs_cols <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"KM"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">42</span>, <span class="st">"_Abs"</span>)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>km_tests <span class="ot">&lt;-</span> <span class="fu">map_df</span>(km_abs_cols, <span class="cf">function</span>(km_col) {</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  g1_vals <span class="ot">&lt;-</span> df_vel_clean[[km_col]][df_vel_clean<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">"G1"</span>]</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  g2_vals <span class="ot">&lt;-</span> df_vel_clean[[km_col]][df_vel_clean<span class="sc">$</span>Grupo <span class="sc">==</span> <span class="st">"G2"</span>]</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  g1_vals <span class="ot">&lt;-</span> g1_vals[<span class="sc">!</span><span class="fu">is.na</span>(g1_vals)]</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  g2_vals <span class="ot">&lt;-</span> g2_vals[<span class="sc">!</span><span class="fu">is.na</span>(g2_vals)]</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(g1_vals) <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;&amp;</span> <span class="fu">length</span>(g2_vals) <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    tt <span class="ot">&lt;-</span> <span class="fu">t.test</span>(g1_vals, g2_vals)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    wt <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(g1_vals, g2_vals)</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">KM =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"KM|_Abs"</span>, <span class="st">""</span>, km_col)),</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">Mean_G1 =</span> <span class="fu">mean</span>(g1_vals),</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">Mean_G2 =</span> <span class="fu">mean</span>(g2_vals),</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">Diff =</span> <span class="fu">mean</span>(g1_vals) <span class="sc">-</span> <span class="fu">mean</span>(g2_vals),</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_val_t =</span> tt<span class="sc">$</span>p.value,</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>      <span class="at">p_val_wil =</span> wt<span class="sc">$</span>p.value</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">KM =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"KM|_Abs"</span>, <span class="st">""</span>, km_col)), <span class="at">Mean_G1 =</span> <span class="cn">NA</span>, <span class="at">Mean_G2 =</span> <span class="cn">NA</span>, <span class="at">Diff =</span> <span class="cn">NA</span>, <span class="at">p_val_t =</span> <span class="cn">NA</span>, <span class="at">p_val_wil =</span> <span class="cn">NA</span>)</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>A comparação km a km revelou alta consistência de ritmo em 41 dos 42 quilômetros. A única divergência estatisticamente significante ocorreu na reta final:</p>
+<div class="callout-box">
+<p><strong>Destaque no Quilômetro 37:</strong><br> No <strong>KM 37</strong>, o Grupo 1 manteve velocidade média de <strong><span class="math inline">\(11,8\text{ km/h}\)</span></strong>, enquanto o Grupo 2 sofreu uma desaceleração para <strong><span class="math inline">\(10,4\text{ km/h}\)</span></strong> (<span class="math inline">\(p = 0,0389\)</span> no teste t; <span class="math inline">\(p = 0,0362\)</span> no teste de Wilcoxon). Isso sugere que os atletas da sequência G1 (Treino A <span class="math inline">\(\rightarrow\)</span> Treino B) preservaram melhor a capacidade mecânica de final de prova.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Mostrar o código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(km_tests, <span class="fu">aes</span>(<span class="at">x =</span> KM, <span class="at">y =</span> Mean_G1, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"G1"</span>), <span class="at">linewidth =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"G1"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Mean_G2, <span class="at">color =</span> <span class="st">"G2"</span>), <span class="at">linewidth =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Mean_G2, <span class="at">color =</span> <span class="st">"G2"</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">filter</span>(km_tests, p_val_t <span class="sc">&lt;</span> <span class="fl">0.05</span>), <span class="fu">aes</span>(<span class="at">y =</span> Mean_G1), </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">4.5</span>, <span class="at">shape =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors_g) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">42</span>, <span class="at">by =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Padrão de Ritmo (Velocidade) Km a Km na Maratona"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Linhas representam médias dos grupos; o losango vermelho indica p &lt; 0.05 no KM 37"</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Quilômetro da Corrida"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Velocidade Média (km/h)"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Grupo"</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="decoupling_files/figure-html/grafico_ritmo-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Figura 3: Perfil de Velocidade Média Km a Km na Maratona entre G1 e G2. O ponto vermelho em destaque no KM 37 indica diferença estatisticamente significante (p &lt; 0.05).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="conclusões-e-síntese-prática" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Conclusões e Síntese Prática</h1>
+<ol type="1">
+<li><strong>Equalização da Durabilidade</strong>: Embora o Grupo 2 tenha iniciado o programa com níveis mais elevados de estresse cardiovascular relativo (decoupling mais alto no TT1), a periodização foi bem-sucedida em igualar os dois grupos ao longo das semanas 8 e 16.</li>
+<li><strong>Estabilidade de Ritmo e KM 37</strong>: O pacing foi muito consistente entre os grupos. A única quebra estatística de ritmo ocorreu no KM 37, onde os corredores do Grupo 1 conseguiram manter um ritmo superior, evidenciando uma sutil vantagem de durabilidade tardia.</li>
+<li><strong>Onset Precoce em Atletas Sub-4h</strong>: Em intensidades moderadas (Z1), corredores mais rápidos ativam ajustes cardiovasculares mais cedo sem comprometer a estabilidade final, demonstrando uma regulação autonômica ativa.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./references.html" class="pagination-link" aria-label="Achados e Recomedações">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Achados e Recomedações</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
